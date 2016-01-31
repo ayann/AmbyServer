@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   before_create do |user|
     self.token = SecureRandom.hex
   end
+
+  def join room
+    self.user_rooms.build(room: room).save!
+  end
+
+  def unjoin room
+    self.user_rooms.where(room: room).last.destroy
+  end
 end
