@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def search_room
+    room = Room.where(user_rooms)
+  end
+
   private
 
   def user_params
