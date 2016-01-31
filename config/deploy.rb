@@ -58,7 +58,7 @@ task :setup => :environment do
   # Create database.yml for Postgres if it doesn't exist
   path_database_yml = "#{deploy_to}/#{shared_path}/config/database.yml"
   database_yml = %[production:
-  database: rails-demo
+  database: #{app_name}
   adapter: postgresql
   pool: 5
   timeout: 5000]
