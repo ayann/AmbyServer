@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   get 'pages/index'
 
-  resources :users, defaults: { :format => :json }
+  resources :users, defaults: { :format => :json } do
+    member do
+      get 'room'
+      get 'room_users'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

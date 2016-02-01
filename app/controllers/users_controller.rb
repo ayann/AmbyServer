@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :resource, except: [:index, :create]
+
   def index
     @users = User.all
   end
@@ -17,11 +19,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def search_room
-    room = Room.where(user_rooms)
+  def room
+    render json: @user.room
+  end
+
+  def room_users
+    render json: @user.room.users
   end
 
   private
+
+  def resource
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.permit :name
