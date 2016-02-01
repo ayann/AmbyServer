@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  get 'pages/index'
-
   resources :users, defaults: { :format => :json } do
     member do
       get 'room'
       get 'room_users'
+      get 'leave_room'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

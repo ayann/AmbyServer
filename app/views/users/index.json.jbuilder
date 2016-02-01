@@ -1,1 +1,1 @@
-json.users @users, :id, :name
+json.users @users, :id, :name, :token

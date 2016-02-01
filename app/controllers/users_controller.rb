@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user
     else
-      render json: {error: @user.errors.full_messages}, status: :unprocessable_entity
+      error @user.errors.full_messages
     end
   end
 
@@ -23,7 +23,17 @@ class UsersController < ApplicationController
     render json: @user.room
   end
 
+  def leave_room
+    if @user.unjoin @user.room
+      render json: { succes: true }
+    else
+      error "Error perfomed pending room leave action"
+    end
+  end
+
   def room_users
+    @user = User.find(params[:id])
+
     render json: @user.room.users
   end
 
@@ -35,5 +45,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit :name
+  end
+
+  def error message
+    render json: { error: message }, status: :unprocessable_entity
   end
 end
